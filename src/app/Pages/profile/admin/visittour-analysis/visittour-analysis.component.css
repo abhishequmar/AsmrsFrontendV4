@@ -1,0 +1,11 @@
+/* Optional: Customize the pie chart segments */
+circle {
+    transition: stroke-dasharray 1s, stroke-dashoffset 1s;
+  }
+  
+  text {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    fill: white;
+  }
+  

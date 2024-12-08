@@ -1,0 +1,93 @@
+<!-- user-projects.component.html -->
+<div class="container mx-auto p-6">
+  <h2 class="text-2xl font-semibold mb-4">Your Conservation Projects</h2>
+
+  <!-- Button to open modal -->
+  <button (click)="openAddProjectModal()" class="bg-green-500 text-white px-4 py-2 rounded mb-4 hover:bg-green-600">
+    Add New Project
+  </button>
+
+  <!-- Display all projects -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <app-conservationproject
+      *ngFor="let project of projects"
+      [project]="project"
+    ></app-conservationproject>
+  </div>
+
+  <!-- Modal for adding a new project -->
+<div *ngIf="isAddModalOpen" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">c
+  <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
+    <div class="flex justify-between items-center mb-4">
+      <h4 class="text-xl font-semibold">Add New Conservation Project</h4>
+      <button (click)="closeAddModal()" class="text-gray-600 hover:text-gray-800">&times;</button>
+    </div>
+
+    <div class="space-y-4">
+      <!-- Site Name Dropdown -->
+      <div>
+        <label class="block text-sm font-medium">Site Name</label>
+        <select
+          [(ngModel)]="newProject.siteId"
+          (change)="assignSiteNameById(newProject.siteId)"
+          class="w-full p-2 border rounded-md"
+        >
+          <option value="">Select a Site</option>
+          <option *ngFor="let site of availableSites" [value]="site.siteId">{{ site.name }}</option>
+        </select>
+
+      </div>
+
+      <!-- Objective -->
+      <div>
+        <label class="block text-sm font-medium">Objective</label>
+        <input [(ngModel)]="newProject.objective" class="w-full p-2 border rounded-md" />
+      </div>
+
+      <!-- Conservation Method Dropdown -->
+      <div>
+        <label class="block text-sm font-medium">Conservation Method</label>
+        <select [(ngModel)]="newProject.conservationMethod" class="w-full p-2 border rounded-md">
+          <option value="Artifact Preservation">Artifact Preservation</option>
+          <option value="Structural Stabilization">Structural Stabilization</option>
+          <option value="Cultural Heritage Documentation">Cultural Heritage Documentation</option>
+          <option value="Material Analysis">Material Analysis</option>
+          <option value="Preventive Conservation">Preventive Conservation</option>
+        </select>
+      </div>
+      
+
+      <!-- Start Date -->
+      <div>
+        <label class="block text-sm font-medium">Start Date</label>
+        <input [(ngModel)]="newProject.startDate" type="date" class="w-full p-2 border rounded-md" />
+      </div>
+
+      <!-- End Date -->
+      <div>
+        <label class="block text-sm font-medium">End Date</label>
+        <input [(ngModel)]="newProject.endDate" type="date" class="w-full p-2 border rounded-md" />
+      </div>
+
+      <!-- Funding Source Dropdown -->
+      <div>
+        <label class="block text-sm font-medium">Funding Source</label>
+        <select [(ngModel)]="newProject.fundingSource" class="w-full p-2 border rounded-md">
+          <option value="Government Grant">Government Grant</option>
+          <option value="Private Donation">Private Donation</option>
+          <option value="NGO Funding">NGO Funding</option>
+          <option value="Corporate Sponsorship">Corporate Sponsorship</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mt-4 flex justify-end space-x-4">
+      <button (click)="addProject()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Save Project</button>
+      <button (click)="closeAddModal()" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Cancel</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+

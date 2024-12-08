@@ -1,0 +1,78 @@
+<nav class="bg-black bg-opacity-80 text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Left: Logo -->
+      <a href="/">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" width="200" height="50">
+  <!-- Background Rectangle -->
+  <rect x="0" y="0" width="400" height="100" fill="#F4D03F" />
+
+  <!-- Text -->
+  <text x="50%" y="50%" text-anchor="middle" font-size="48" fill="#6A4F4B" font-family="Georgia, serif" dy=".3em">
+    Archaeology Hub
+  </text>
+  
+  <!-- Egyptian Accents -->
+  <line x1="20" y1="80" x2="100" y2="80" stroke="#6A4F4B" stroke-width="5" />
+  <line x1="300" y1="80" x2="380" y2="80" stroke="#6A4F4B" stroke-width="5" />
+</svg>
+
+      </a>
+
+      <!-- Center: Dropdowns and Navigation Links -->
+      <div class="hidden md:flex space-x-4">
+        <a href="/publications" class="hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium">Publications</a>
+        <a href="/tours" class="hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium">Tours</a>
+        <a href="/sites" class="hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium">Sites</a>
+      </div>
+
+      <!-- Right: Avatar or Login Button -->
+      <div class="flex items-center space-x-4">
+        <!-- Hamburger Icon (shown on small screens) -->
+        <button
+          class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          (click)="toggleMobileMenu()"
+        >
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+          </svg>
+        </button>
+
+        <!-- Conditional Avatar or Login Button -->
+        <div *ngIf="isUserLoggedIn; else loginButton">
+          <!-- Circular Avatar with Dropdown -->
+          <div class="relative">
+            <button (click)="toggleAvatarDropdown()" class="flex-shrink-0">
+              <img class="h-10 w-10 rounded-full" src="assets/profile.png" alt="User Avatar" />
+            </button>
+
+            <!-- Dropdown Menu -->
+<div 
+  *ngIf="avatarDropdownOpen" 
+  class="absolute right-0 mt-2 w-48 bg-gray-800 text-white rounded-md shadow-lg dropdown-visible">
+  <a href="/profile" class="block px-4 py-2 text-sm">Profile</a>
+  <button (click)="signOut()" class="block px-4 py-2 text-sm">Sign Out</button>
+</div>
+
+          </div>
+        </div>
+
+        <!-- Login Button (shown if the user is not logged in) -->
+        <ng-template #loginButton>
+          <a href="/auth" class="hover:bg-gray-700 px-4 py-2 rounded-md text-sm font-medium">Login</a>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div *ngIf="mobileMenuOpen" class="md:hidden ">
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <a href="/publications" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">Publications</a>
+      <a href="/tours" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">Tours</a>
+      <a href="/sites" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">Sites</a>
+    </div>
+  </div>
+</nav>

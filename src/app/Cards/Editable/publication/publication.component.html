@@ -1,0 +1,132 @@
+<div class="max-w-sm bg-white border rounded-lg shadow-md">
+  <div *ngIf="!isEditing; else editMode" class="p-6 bg-white shadow-lg rounded-lg mb-6">
+  <!-- Title Section -->
+  <div class="mb-4">
+    <h3 class="text-2xl font-semibold text-gray-800">{{ publication.title }}</h3>
+  </div>
+
+  <!-- Partition Line -->
+  <hr class="border-gray-300 my-4" />
+
+  <!-- Abstract Section -->
+  <div class="mb-4">
+    <p class="text-gray-600 text-lg"><strong>Abstract:</strong> {{ publication.abstract }}</p>
+  </div>
+
+  <!-- Author Details Section -->
+  <div class="mb-4">
+    <p class="text-gray-600 text-lg"><strong>Author:</strong> {{ publication.authorName }}</p>
+    <p class="text-gray-600 text-lg"><strong>Author ID:</strong> {{ publication.authorId }}</p>
+  </div>
+
+  <!-- Date Published Section -->
+  <div class="mb-4">
+    <p class="text-gray-600 text-lg">
+      <strong>Date Published:</strong> {{ publication.datePublished | date }}
+    </p>
+  </div>
+
+  <!-- File Link Section -->
+  <div class="mb-4">
+    <p class="text-gray-600 text-lg">
+      <strong>File Link:</strong>
+      <a
+        href="{{ publication.fileLink }}"
+        class="text-blue-500 hover:underline"
+        target="_blank"
+        >View File</a
+      >
+    </p>
+  </div>
+
+  <!-- Action Buttons Section -->
+  <div class="flex justify-between items-center mt-6">
+    <button
+      class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+      (click)="toggleEdit()"
+    >
+      <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+    width="20"
+    height="20"
+  >
+    <path
+      d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+    />
+  </svg>
+    </button>
+    <button
+      class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-red-600"
+      (click)="deleteCard()"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
+<path
+        d="M9 3v1H4v2h1v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5V3H9zm-3 4h12v12H6V7zm3 2v8h2v-8H9zm4 0v8h2v-8h-2z"
+      />      </svg>
+    </button>
+  </div>
+</div>
+
+
+
+  <!-- Edit Mode -->
+<!-- Edit Mode -->
+<ng-template #editMode>
+  <div class="p-4">
+    <h3 class="text-lg font-semibold text-gray-800 mb-2">Edit Publication</h3>
+
+    <!-- Title -->
+    <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+    <input
+      class="w-full border p-2 rounded mb-2"
+      [(ngModel)]="updatedTitle"
+      placeholder="Edit title"
+    />
+
+    <!-- Abstract -->
+    <label class="block text-sm font-medium text-gray-700 mb-1">Abstract</label>
+    <textarea
+      class="w-full border p-2 rounded mb-2"
+      [(ngModel)]="updatedAbstract"
+      placeholder="Edit abstract"
+    ></textarea>
+
+    
+
+    
+
+    
+
+    <!-- File Link -->
+    <label class="block text-sm font-medium text-gray-700 mb-1">File Link (URL)</label>
+    <input
+      class="w-full border p-2 rounded mb-2"
+      [(ngModel)]="updatedFileLink"
+      placeholder="Edit file link (URL)"
+    />
+
+    
+
+    <div class="flex justify-end gap-2 mt-4">
+      <!-- Cancel Button -->
+      <button
+        class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+        (click)="toggleEdit()"
+      >
+        Cancel
+      </button>
+
+      <!-- Save Button -->
+      <button
+        class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+        (click)="updateCard()"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+</div>

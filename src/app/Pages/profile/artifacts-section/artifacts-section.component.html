@@ -1,0 +1,152 @@
+<!-- Artifact List Section -->
+<div class="flex justify-between items-center mb-4 p-10">
+  <h2 class="text-2xl font-semibold">Artifact List</h2>
+  <button
+    class="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600 flex items-center gap-2"
+    (click)="showCreateArtifactModal()"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      width="20"
+      height="20"
+    >
+      <path
+        d="M12 4a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2h-6v6a1 1 0 1 1-2 0v-6H5a1 1 0 0 1 0-2h6V5a1 1 0 0 1 1-1z"
+      />
+    </svg>
+    Add New Artifact
+  </button>
+</div>
+
+
+<!-- Artifact Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-10">
+  <!-- Check if there are artifacts -->
+  <ng-container *ngIf="artifacts.length > 0; else noArtifacts">
+    <app-artifact
+      *ngFor="let artifact of artifacts"
+      [artifact]="artifact"
+      (updateArtifact)="updateArtifact(artifact)"
+      (deleteArtifact)="deleteArtifact(artifact.artifactId)"
+    ></app-artifact>
+  </ng-container>
+
+  <!-- Placeholder when no artifacts are available -->
+  <ng-template #noArtifacts>
+    <div class="col-span-full text-center text-lg text-gray-500">
+      No artifacts available. Please add new artifacts.
+    </div>
+  </ng-template>
+</div>
+
+<!-- New Artifact Modal -->
+<div *ngIf="showNewArtifactModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg shadow-lg p-6 w-1/3 max-h-[90vh] overflow-y-auto">
+    <h3 class="text-lg font-semibold text-gray-800 mb-4">Create New Artifact</h3>
+
+    <!-- Name Field -->
+    <label class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+    <input
+      type="text"
+      [(ngModel)]="newArtifact.name"
+      class="w-full border border-gray-300 rounded p-2 mb-4"
+      placeholder="Enter artifact name"
+    />
+
+    <!-- Material Field -->
+    <label class="block text-sm font-medium text-gray-700 mb-2">Material</label>
+    <input
+      type="text"
+      [(ngModel)]="newArtifact.material"
+      class="w-full border border-gray-300 rounded p-2 mb-4"
+      placeholder="Enter artifact material"
+    />
+
+    <!-- Condition Field -->
+    <label class="block text-sm font-medium text-gray-700 mb-2">Condition</label>
+    <input
+      type="text"
+      [(ngModel)]="newArtifact.condition"
+      class="w-full border border-gray-300 rounded p-2 mb-4"
+      placeholder="Enter artifact condition"
+    />
+
+    <!-- Cultural Significance Field (Optional) -->
+    <label class="block text-sm font-medium text-gray-700 mb-2">Cultural Significance</label>
+    <input
+      type="text"
+      [(ngModel)]="newArtifact.culturalSignificance"
+      class="w-full border border-gray-300 rounded p-2 mb-4"
+      placeholder="Enter cultural significance (Optional)"
+    />
+
+    <!-- Date Found Field -->
+    <label class="block text-sm font-medium text-gray-700 mb-2">Date Found</label>
+    <input
+      type="date"
+      [(ngModel)]="newArtifact.dateFound"
+      class="w-full border border-gray-300 rounded p-2 mb-4"
+    />
+
+    <!-- Current Location Field -->
+    <label class="block text-sm font-medium text-gray-700 mb-2">Current Location</label>
+    <input
+      type="text"
+      [(ngModel)]="newArtifact.currentLocation"
+      class="w-full border border-gray-300 rounded p-2 mb-4"
+      placeholder="Enter current location"
+    />
+
+    <!-- Previous Location Field -->
+    <label class="block text-sm font-medium text-gray-700 mb-2">Previous Location</label>
+    <input
+      type="text"
+      [(ngModel)]="newArtifact.previousLocation"
+      class="w-full border border-gray-300 rounded p-2 mb-4"
+      placeholder="Enter previous location"
+    />
+
+    
+
+    <!-- Preservation Status Field -->
+    <label class="block text-sm font-medium text-gray-700 mb-2">Preservation Status</label>
+    <select
+      [(ngModel)]="newArtifact.preservationStatus"
+      class="w-full border border-gray-300 rounded p-2 mb-4"
+    >
+      <option value="stable">Stable</option>
+      <option value="needs_attention">Needs Attention</option>
+      <option value="critical">Critical</option>
+    </select>
+
+    <!-- Site Selector -->
+    <label class="block text-sm font-medium text-gray-700 mb-2">Site</label>
+    <select
+      [(ngModel)]="newArtifact.siteId"
+      class="w-full border border-gray-300 rounded p-2 mb-4"
+    >
+      <option *ngFor="let site of sites" [value]="site.siteId">{{ site.name }}</option>
+    </select>
+
+    <div class="flex justify-end space-x-4">
+      <!-- Cancel Button -->
+      <button
+        class="bg-gray-500 text-white py-1 px-4 rounded hover:bg-gray-600"
+        (click)="showNewArtifactModal = false"
+      >
+        Cancel
+      </button>
+      <!-- Save Button -->
+      <button
+        class="bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600"
+        (click)="createArtifact()"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+
+

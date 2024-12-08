@@ -1,0 +1,20 @@
+/* Add any custom styles you want for the site card here */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.max-w-sm {
+  max-width: 400px;
+}
+
+.text-gray-700 {
+  color: #4a5568;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.bg-white {
+  background-color: #fff;
+}

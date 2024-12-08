@@ -1,0 +1,34 @@
+<div class="container mx-auto p-10">
+  <h1 class="text-3xl font-bold text-center mb-6">Explore Tours</h1>
+
+  <!-- Search and Filter Section -->
+  <div class="flex flex-col md:flex-row md:justify-between gap-4 mb-6 ">
+    <input
+      type="text"
+      placeholder="Search by site name"
+      class="w-full md:w-1/2 p-2 border rounded-lg"
+      [(ngModel)]="searchQuery"
+      (input)="filterTours()"
+    />
+    <input
+      type="date"
+      class="w-full md:w-1/3 p-2 border rounded-lg"
+      [(ngModel)]="dateFilter"
+      (change)="filterTours()"
+    />
+  </div>
+
+  <!-- Tours List -->
+  <div *ngIf="filteredTours.length; else noTours" class=" p-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <app-visittourcard
+      *ngFor="let tour of filteredTours"
+      [visitorTour]="tour"
+      [currentUserId]="currentUserId"
+    ></app-visittourcard>
+  </div>
+
+  <!-- No Tours Found -->
+  <ng-template #noTours class="p-10">
+    <p class="text-center text-gray-500">No tours found. Try adjusting your search or filters.</p>
+  </ng-template>
+</div>

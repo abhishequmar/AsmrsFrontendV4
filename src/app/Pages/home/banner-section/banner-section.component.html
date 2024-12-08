@@ -1,0 +1,83 @@
+<div class="relative overflow-hidden">
+  <div class="flex transition-transform duration-700 ease-in-out" [ngStyle]="{ transform: 'translateX(' + currentSlide * -100 + '%)' }">
+    <!-- Slide 1 -->
+    <div class="w-full flex-shrink-0">
+      <div class="relative h-screen bg-cover bg-center" style="background-image: url('assets/banner1.jpg');">
+        <a href="/sites">
+          <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center text-center">
+    <div class="text-white">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Unearth Ancient Mysteries</h1>
+      <p class="text-lg md:text-xl">Dive into the fascinating world of archaeology and explore the remnants of ancient civilizations.</p>
+      <!-- Button for Navigation -->
+      <div class="mt-6">
+        <button
+          class="px-6 py-3 bg-yellow-500 hover:bg-yellow-400 text-white font-bold rounded transition">
+          Explore Now
+        </button>
+      </div>
+    </div>
+  </div>
+        </a>
+  
+</div>
+
+    </div>
+    <!-- Slide 2 -->
+    <div class="w-full flex-shrink-0">
+      <div class="relative h-screen bg-cover bg-center" style="background-image: url('assets/banner2.webp');">
+        <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center text-center">
+          <div class="text-white">
+  <h1 class="text-4xl md:text-5xl font-bold mb-4">Explore Ancient Wonders</h1>
+  <p class="text-lg md:text-xl">Embark on an unforgettable journey to iconic archaeological sites and hidden treasures.</p>
+  <!-- Button for Navigation -->
+  <div class="mt-6">
+    <button
+      class="px-6 py-3 bg-yellow-500 hover:bg-yellow-700 text-white font-bold rounded transition">
+      Plan Your Tour
+    </button>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+    <!-- Slide 3 -->
+    <div class="w-full flex-shrink-0">
+      <div class="relative h-screen bg-cover bg-center" style="background-image: url('assets/banner3.jpg');">
+        <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center text-center">
+          <div class="text-white">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Plan Your Visit</h1>
+            <p class="text-lg md:text-xl">Get ready to embark on an unforgettable journey</p>
+            <!-- Button for Navigation -->
+            <div class="mt-6">
+              <button
+                class="px-6 py-3 bg-yellow-500 hover:bg-yellow-700 text-white font-bold rounded transition">
+                Plan Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Navigation Arrows -->
+  <button
+    (click)="prevSlide()"
+    class="absolute left-0 top-1/2 transform -translate-y-1/2 p-2 text-white bg-black bg-opacity-50 hover:bg-opacity-75 rounded-full">
+    &#8249;
+  </button>
+  <button
+    (click)="nextSlide()"
+    class="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 text-white bg-black bg-opacity-50 hover:bg-opacity-75 rounded-full">
+    &#8250;
+  </button>
+  <!-- Dots -->
+  <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-2">
+    <button
+      *ngFor="let slide of slides; let i = index"
+      [class.bg-white]="i === currentSlide"
+      [class.bg-gray-400]="i !== currentSlide"
+      (click)="setSlide(i)"
+      class="w-3 h-3 rounded-full bg-gray-400 hover:bg-white transition"></button>
+  </div>
+</div>

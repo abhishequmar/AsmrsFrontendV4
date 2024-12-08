@@ -1,0 +1,39 @@
+<div class="max-w-6xl mx-auto p-4 flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-6">
+  <!-- Main Profile Section -->
+  <div class="flex-1">
+    <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6">
+      <!-- Profile Image -->
+      <div class="flex-shrink-0">
+        <img
+          src="assets/profile.png"
+          alt="Profile"
+          class="w-24 h-24 md:w-32 md:h-32 rounded-full border-2 border-gray-200"
+        />
+      </div>
+
+      <!-- Profile Info -->
+      <div class="flex-grow text-center md:text-left">
+        <h2 class="text-xl md:text-2xl font-semibold text-gray-800">{{userName}}</h2>
+        <p class="text-sm md:text-base text-blue-500">{{userRole}}</p>
+        <p class="text-sm md:text-base text-blue-500">{{userEmail}}</p>
+        
+      </div>
+
+      
+    </div>
+
+    
+  </div>
+
+
+
+</div>
+<app-archaeologist *ngIf="isArchaeologist"></app-archaeologist>
+<app-visitor *ngIf="isVisitor"></app-visitor>
+<app-conservator *ngIf="isConservator"></app-conservator>
+<app-tourguide *ngIf="isTourguide"></app-tourguide>
+<app-admin *ngIf="isAdmin"></app-admin>
+<app-researcher *ngIf="isResearcher"></app-researcher>
+
+
+

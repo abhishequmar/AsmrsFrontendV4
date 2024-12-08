@@ -1,0 +1,83 @@
+<div class="container mx-auto p-6">
+  <!-- Header Section -->
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-2xl font-semibold text-gray-800">Your Publications</h2>
+    <button
+    class="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600 flex items-center gap-2"
+      (click)="toggleAddPublicationModal()"
+    >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      width="20"
+      height="20"
+    >
+      <path
+        d="M12 4a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2h-6v6a1 1 0 1 1-2 0v-6H5a1 1 0 0 1 0-2h6V5a1 1 0 0 1 1-1z"
+      />
+    </svg>
+      Add Publication
+    </button>
+  </div>
+
+  <!-- Add Publication Modal -->
+  <div
+    *ngIf="isAddingPublication"
+    class="bg-white border rounded-lg shadow-md p-6 mb-6"
+  >
+    <h3 class="text-xl font-semibold text-gray-800 mb-4">Add New Publication</h3>
+    <input
+      class="w-full border p-2 rounded mb-2"
+      [(ngModel)]="newPublication.title"
+      placeholder="Title"
+    />
+    <textarea
+      class="w-full border p-2 rounded mb-2"
+      [(ngModel)]="newPublication.abstract"
+      placeholder="Abstract"
+    ></textarea>
+
+    <select
+    class="w-full border p-2 rounded mb-2"
+    [(ngModel)]="newPublication.siteId"
+    [ngModelOptions]="{ standalone: true }"
+  >
+    <option value="" disabled selected>Select Site</option>
+    <option *ngFor="let site of sites" [value]="site.siteId">{{ site.name }}</option>
+  </select>
+    <input
+      class="w-full border p-2 rounded mb-2"
+      [(ngModel)]="newPublication.fileLink"
+      placeholder="File Link (URL)"
+    />
+    <div class="flex justify-end gap-2">
+      <button
+        class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+        (click)="toggleAddPublicationModal()"
+      >
+        Cancel
+      </button>
+      <button
+        class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+        (click)="addPublication()"
+      >
+        Add
+      </button>
+    </div>
+  </div>
+
+  <!-- Publications List -->
+  <div *ngIf="publications.length; else noPublications" class="grid gap-4">
+    <app-publication
+      *ngFor="let publication of publications"
+      [publication]="publication"
+      (delete)="removePublication(publication.publicationId)"
+    ></app-publication>
+  </div>
+
+  <!-- No Publications Placeholder -->
+  <ng-template #noPublications>
+    <p class="text-gray-600 text-center">No publications found. Add one now!</p>
+  </ng-template>
+</div>

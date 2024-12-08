@@ -1,0 +1,178 @@
+<div class="p-4">
+  <div class="flex items-center justify-between mb-4">
+    <h1 class="text-2xl font-bold">My Tours</h1>
+    <button (click)="openTourModal()"     class="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600 flex items-center gap-2"
+>
+      <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      width="20"
+      height="20"
+    >
+      <path
+        d="M12 4a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2h-6v6a1 1 0 1 1-2 0v-6H5a1 1 0 0 1 0-2h6V5a1 1 0 0 1 1-1z"
+      />
+    </svg>
+      Add New Tour
+    </button>
+  </div>
+  
+  <!-- Modal for adding/updating a tour -->
+  <div *ngIf="isModalOpen" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-10">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+      <h2 class="text-xl font-bold mb-4">{{ isEditMode ? 'Edit Tour' : 'Add New Tour' }}</h2>
+
+      <form (ngSubmit)="onSubmit()">
+        
+
+        <!-- Site ID (Dropdown to select from available sites) -->
+  <div class="mb-4">
+    <label for="siteId" class="block text-sm font-medium text-gray-700">Select Site</label>
+    <select
+      id="siteId"
+      [(ngModel)]="tourForm.siteId"
+      name="siteId"
+      class="mt-1 block w-full border-gray-300 rounded-md"
+      required
+    >
+      <option value="">Select a Site</option>
+      <option *ngFor="let site of availableSites" [value]="site.siteId">{{ site.name }}</option>
+    </select>
+  </div>
+
+
+        
+
+        <!-- Date -->
+        <div class="mb-4">
+          <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+          <input
+            id="date"
+            type="date"
+            [(ngModel)]="tourForm.date"
+            name="date"
+            class="mt-1 block w-full border-gray-300 rounded-md"
+            required
+          />
+        </div>
+
+        <!-- Time -->
+        <div class="mb-4">
+          <label for="time" class="block text-sm font-medium text-gray-700">Time</label>
+          <input
+            id="time"
+            type="time"
+            [(ngModel)]="tourForm.time"
+            name="time"
+            class="mt-1 block w-full border-gray-300 rounded-md"
+            required
+          />
+        </div>
+
+        <!-- Capacity -->
+        <div class="mb-4">
+          <label for="capacity" class="block text-sm font-medium text-gray-700">Capacity</label>
+          <input
+            id="capacity"
+            type="number"
+            [(ngModel)]="tourForm.capacity"
+            name="capacity"
+            class="mt-1 block w-full border-gray-300 rounded-md"
+            placeholder="Capacity"
+            required
+          />
+        </div>
+
+        <!-- Duration -->
+        <div class="mb-4">
+          <label for="duration" class="block text-sm font-medium text-gray-700">Duration</label>
+          <select
+            id="duration"
+            [(ngModel)]="tourForm.duration"
+            name="duration"
+            class="mt-1 block w-full border-gray-300 rounded-md"
+            required
+          >
+            <option value="" disabled>Select Duration</option>
+            <option value="1">1 day</option>
+            <option value="2">2 days</option>
+            <option value="3">3 days</option>
+            <option value="4">4 days</option>
+          </select>
+        </div>
+
+
+        <!-- Description -->
+        <div class="mb-4">
+          <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+          <textarea
+            id="description"
+            [(ngModel)]="tourForm.description"
+            name="description"
+            class="mt-1 block w-full border-gray-300 rounded-md"
+            placeholder="Tour Description"
+            required
+          ></textarea>
+        </div>
+
+        <!-- Booking Status -->
+        <div class="mb-4">
+          <label for="bookingStatus" class="block text-sm font-medium text-gray-700">Booking Status</label>
+          <select
+            id="bookingStatus"
+            [(ngModel)]="tourForm.bookingStatus"
+            name="bookingStatus"
+            class="mt-1 block w-full border-gray-300 rounded-md"
+            required
+          >
+            <option value="Open">Open</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </div>
+
+        <!-- Image URL -->
+        <div class="mb-4">
+          <label for="imageUrl" class="block text-sm font-medium text-gray-700">Image URL</label>
+          <input
+            id="imageUrl"
+            type="text"
+            [(ngModel)]="tourForm.imageUrl"
+            name="imageUrl"
+            class="mt-1 block w-full border-gray-300 rounded-md"
+            placeholder="Image URL"
+            required
+          />
+        </div>
+
+
+        <div class="flex justify-between">
+          <button
+            type="button"
+            (click)="closeTourModal()"
+            class="px-4 py-2 bg-gray-500 text-white rounded-lg"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="px-4 py-2 bg-blue-500 text-white rounded-lg"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+ <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+  <div *ngFor="let tour of tours">
+    <app-visittour
+      [tour]="tour"
+      (deleteTour)="onDeleteTour(tour.tourId)"
+      (udpateTour)="onUpdateTour(tour)"
+    ></app-visittour>
+  </div>
+</div>
+
+</div>

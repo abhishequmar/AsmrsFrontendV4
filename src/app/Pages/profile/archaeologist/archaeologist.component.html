@@ -1,0 +1,171 @@
+<!-- Title and Button Side by Side -->
+<div class="flex items-center justify-between mb-6 p-10">
+  <!-- Title for the Section -->
+  <div class="text-2xl font-bold text-gray-800">
+    <h2>Your Sites</h2>
+  </div>
+
+  <!-- Button to open Add Site Modal -->
+<button
+  (click)="openAddModal()"
+  class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 flex items-center gap-2"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="white"
+    viewBox="0 0 24 24"
+    width="20"
+    height="20"
+  >
+    <path
+      d="M12 4a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2h-6v6a1 1 0 1 1-2 0v-6H5a1 1 0 0 1 0-2h6V5a1 1 0 0 1 1-1z"
+    />
+  </svg>
+  Add New Site
+</button>
+
+</div>
+
+
+<!-- Section for displaying user's sites -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-10">
+  <!-- Check if there are no sites available -->
+  <div *ngIf="userSites.length === 0" class="col-span-full text-center text-gray-500">
+    No sites available. Add a new site to get started.
+  </div>
+  
+  <!-- Display each site -->
+  <app-site
+    *ngFor="let site of userSites"
+    [site]="site"
+    (edit)="openEditModal($event)"
+    (delete)="deleteSite($event)"
+  ></app-site>
+</div>
+
+
+<!-- Add or Edit Site Modal -->
+<div
+  *ngIf="isAddModalOpen || isEditModalOpen"
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+>
+  <div class="bg-white p-6 rounded-lg w-11/12 md:w-1/2 lg:w-1/3 max-h-screen overflow-y-auto">
+    <h2 class="text-xl font-bold mb-4">
+      {{ isEditModalOpen ? 'Edit Site' : 'Add New Site' }}
+    </h2>
+
+    <form (ngSubmit)="isEditModalOpen ? updateSite() : addSite()">
+      <!-- Name -->
+      <div class="mb-4">
+        <label for="name" class="block text-sm font-medium">Name</label>
+        <input
+          id="name"
+          type="text"
+          [(ngModel)]="currentSite.name"
+          name="name"
+          class="w-full border px-4 py-2 rounded mt-1"
+          required
+        />
+      </div>
+
+      <!-- Location -->
+      <div class="mb-4">
+        <label for="location" class="block text-sm font-medium">Location</label>
+        <input
+          id="location"
+          type="text"
+          [(ngModel)]="currentSite.location"
+          name="location"
+          class="w-full border px-4 py-2 rounded mt-1"
+          required
+        />
+      </div>
+
+      <!-- Historical Period -->
+      <div class="mb-4">
+        <label for="historicalPeriod" class="block text-sm font-medium">Historical Period</label>
+        <select
+          id="historicalPeriod"
+          [(ngModel)]="currentSite.historicalPeriod"
+          name="historicalPeriod"
+          class="w-full border px-4 py-2 rounded mt-1"
+        >
+          <option value="">Select a Period</option>
+          <option value="Ancient">Ancient</option>
+          <option value="Medieval">Medieval</option>
+          <option value="Modern">Modern</option>
+        </select>
+      </div>
+
+      <!-- Description -->
+      <div class="mb-4">
+        <label for="description" class="block text-sm font-medium">Description</label>
+        <textarea
+          id="description"
+          [(ngModel)]="currentSite.description"
+          name="description"
+          class="w-full border px-4 py-2 rounded mt-1"
+        ></textarea>
+      </div>
+
+      <!-- Conservation Status -->
+      <div class="mb-4">
+        <label for="conservationStatus" class="block text-sm font-medium">Conservation Status</label>
+        <select
+          id="conservationStatus"
+          [(ngModel)]="currentSite.conservationStatus"
+          name="conservationStatus"
+          class="w-full border px-4 py-2 rounded mt-1"
+        >
+          <option value="">Select a Status</option>
+          <option value="Stable">Stable</option>
+          <option value="Degraded">Degraded</option>
+          <option value="Under Restoration">Under Restoration</option>
+        </select>
+      </div>
+
+      <!-- Date Discovered -->
+      <div class="mb-4">
+        <label for="dateDiscovered" class="block text-sm font-medium">Date Discovered</label>
+        <input
+          id="dateDiscovered"
+          type="date"
+          [(ngModel)]="currentSite.dateDiscovered"
+          name="dateDiscovered"
+          class="w-full border px-4 py-2 rounded mt-1"
+        />
+      </div>
+
+      <!-- Image URL -->
+      <div class="mb-4">
+        <label for="imageUrl" class="block text-sm font-medium">Image URL</label>
+        <input
+          id="imageUrl"
+          type="text"
+          [(ngModel)]="currentSite.imageUrl"
+          name="imageUrl"
+          class="w-full border px-4 py-2 rounded mt-1"
+        />
+      </div>
+
+      <div class="flex justify-end">
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 mr-2"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-artifacts-section></app-artifacts-section>
+<app-excavation-section></app-excavation-section>

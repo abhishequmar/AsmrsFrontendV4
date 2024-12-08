@@ -1,0 +1,17 @@
+<div class="p-4">
+  <h1 class="text-2xl font-bold pl-10">Your Visit Tours</h1>
+
+  <div *ngIf="userVisitTours.length === 0" class="mt-4 text-gray-600">
+    <p>You are not currently part of any visit tours.</p>
+  </div>
+
+  
+
+  <div  class=" p-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <app-visittourcard
+      *ngFor="let tour of userVisitTours"
+      [visitorTour]="tour"
+      [currentUserId]="currentUserId"
+    ></app-visittourcard>
+  </div>
+</div>

@@ -1,0 +1,193 @@
+<!-- auth.component.html -->
+
+<video 
+    autoplay 
+    muted 
+    loop 
+    class="absolute inset-0 w-full h-full object-cover z-[-1]"
+  >
+    <source src="assets/bgvid2.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+<div >
+
+
+  <!-- Signup section -->
+  <div *ngIf="!isLogin" class=" min-h-screen flex items-center justify-center bg-white-900 px-4 ">
+    <div class="bg-black bg-opacity-50 text-white rounded-lg shadow-lg w-full max-w-md p-6 sm:p-8">
+      <div class="flex justify-center mb-6">
+        <div class="text-4xl font-bold text-yellow-500">Sign Up</div>
+      </div>
+      <form (ngSubmit)="signup()" #signupForm="ngForm">
+        <div class="mb-4">
+          <label for="name" class="block mb-2 text-sm font-medium">Name</label>
+          <input
+            type="text"
+            id="name"
+            [(ngModel)]="name"
+            name="name"
+            #nameField="ngModel"
+            class="w-[100%] p-2 sm:p-3 rounded-lg bg-gray-700 border border-gray-600 focus:ring-yellow-500 focus:border-yellow-500"
+            placeholder="Enter your name"
+            required
+          />
+          <div *ngIf="nameField.invalid && nameField.touched" class="text-red-500 text-sm">
+            <p *ngIf="nameField.errors?.['required']">Name is required.</p>
+          </div>
+        </div>
+  
+        <div class="mb-4">
+          <label for="password" class="block mb-2 text-sm font-medium">Password</label>
+          <input
+            type="password"
+            id="password"
+            [(ngModel)]="password"
+            name="password"
+            #passwordField="ngModel"
+            class="w-full p-2 sm:p-3 rounded-lg bg-gray-700 border border-gray-600 focus:ring-yellow-500 focus:border-yellow-500"
+            placeholder="Enter your password"
+            required
+            minlength="6"
+          />
+          <div *ngIf="passwordField.invalid && passwordField.touched" class="text-red-500 text-sm">
+            <p *ngIf="passwordField.errors?.['required']">Password is required.</p>
+            <p *ngIf="passwordField.errors?.['minlength']">Password must be at least 6 characters long.</p>
+          </div>
+        </div>
+  
+        <div class="mb-4">
+          <label for="role" class="block mb-2 text-sm font-medium">Role</label>
+          <select
+            id="role"
+            [(ngModel)]="role"
+            name="role"
+            #roleField="ngModel"
+            class="w-full p-2 sm:p-3 rounded-lg bg-gray-700 border border-gray-600 focus:ring-yellow-500 focus:border-yellow-500"
+            required
+          >
+            <option value="" disabled selected>Select your role</option>
+            <option value="Admin">Admin</option>
+            <option value="Archaeologist">Archaeologist</option>
+            <option value="Conservator">Conservator</option>
+            <option value="Researcher">Researcher</option>
+            <option value="Tourguide">Tourguide</option>
+            <option value="Visitor">Visitor</option>
+          </select>
+          <div *ngIf="roleField.invalid && roleField.touched" class="text-red-500 text-sm">
+            <p *ngIf="roleField.errors?.['required']">Role is required.</p>
+          </div>
+        </div>
+  
+        <div class="mb-4">
+          <label for="email" class="block mb-2 text-sm font-medium">Email</label>
+          <input
+            type="email"
+            id="email"
+            [(ngModel)]="email"
+            name="email"
+            #emailField="ngModel"
+            class="w-full p-2 sm:p-3 rounded-lg bg-gray-700 border border-gray-600 focus:ring-yellow-500 focus:border-yellow-500"
+            placeholder="Enter your email"
+            required
+            email
+          />
+          <div *ngIf="emailField.invalid && emailField.touched" class="text-red-500 text-sm">
+            <p *ngIf="emailField.errors?.['required']">Email is required.</p>
+            <p *ngIf="emailField.errors?.['email']">Please enter a valid email address.</p>
+          </div>
+        </div>
+  
+        <div class="mb-4">
+          <label for="phone" class="block mb-2 text-sm font-medium">Phone Number</label>
+          <input
+            type="tel"
+            id="phone"
+            [(ngModel)]="phone"
+            name="phone"
+            #phoneField="ngModel"
+            class="w-full p-2 sm:p-3 rounded-lg bg-gray-700 border border-gray-600 focus:ring-yellow-500 focus:border-yellow-500"
+            placeholder="Enter your phone number"
+            required
+            pattern="^\+?[1-9]\d{1,14}$"
+          />
+          <div *ngIf="phoneField.invalid && phoneField.touched" class="text-red-500 text-sm">
+            <p *ngIf="phoneField.errors?.['required']">Phone number is required.</p>
+            <p *ngIf="phoneField.errors?.['pattern']">Please enter a valid phone number.</p>
+          </div>
+        </div>
+  
+        <button
+          type="submit"
+          [disabled]="signupForm.invalid"
+          class="w-full bg-yellow-500 text-gray-900 font-bold py-2 sm:py-3 rounded-lg hover:bg-yellow-600 transition"
+        >
+          Sign Up
+        </button>
+      </form>
+      <div class="mt-6 text-center">
+        <p>Already have an account? <a (click)="toggleForm()" class="text-yellow-500 font-medium hover:underline">Sign In</a></p>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- Login Section -->
+  <div *ngIf="isLogin" class="min-h-screen flex items-center justify-center bg-white-900 px-4">
+    <div class="bg-black bg-opacity-50 text-white rounded-lg shadow-lg w-full max-w-md p-6 sm:p-8">
+      <div class="flex justify-center mb-6">
+        <div class="text-4xl font-bold text-yellow-500">Login</div>
+      </div>
+      <form (ngSubmit)="login()" #loginForm="ngForm">
+        <div class="mb-4">
+          <label for="email" class="block mb-2 text-sm font-medium">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            [(ngModel)]="email"
+            #emailField="ngModel"
+            class="w-full p-2 sm:p-3 rounded-lg bg-gray-700 border border-gray-600 focus:ring-yellow-500 focus:border-yellow-500"
+            placeholder="Enter your email"
+            required
+            email
+          />
+          <div *ngIf="emailField.invalid && emailField.touched" class="text-red-500 text-sm">
+            <p *ngIf="emailField.errors?.['required']">Email is required.</p>
+            <p *ngIf="emailField.errors?.['email']">Please enter a valid email address.</p>
+          </div>
+        </div>
+  
+        <div class="mb-4">
+          <label for="password" class="block mb-2 text-sm font-medium">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            [(ngModel)]="password"
+            #passwordField="ngModel"
+            class="w-full p-2 sm:p-3 rounded-lg bg-gray-700 border border-gray-600 focus:ring-yellow-500 focus:border-yellow-500"
+            placeholder="Enter your password"
+            required
+            minlength="6"
+          />
+          <div *ngIf="passwordField.invalid && passwordField.touched" class="text-red-500 text-sm">
+            <p *ngIf="passwordField.errors?.['required']">Password is required.</p>
+            <p *ngIf="passwordField.errors?.['minlength']">Password must be at least 6 characters long.</p>
+          </div>
+        </div>
+  
+        <button
+          type="submit"
+          [disabled]="loginForm.invalid"
+          class="w-full bg-yellow-500 text-gray-900 font-bold py-2 sm:py-3 rounded-lg hover:bg-yellow-600 transition"
+        >
+          Login
+        </button>
+      </form>
+      <div class="mt-6 text-center">
+        <p>Don't have an account? <a (click)="toggleForm()" class="text-yellow-500 font-medium hover:underline">Sign Up</a></p>
+      </div>
+    </div>
+  </div>
+  
+</div>
