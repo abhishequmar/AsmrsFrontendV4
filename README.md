@@ -1,27 +1,63 @@
-# AsmrsFrontendV2
+# Archaeological Site Management and Research System Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.11.
+## Overview
+This repository contains the frontend codebase for the Archaeological Site Management and Research System. The frontend is built using Angular 17, designed to provide a user-friendly interface for managing archaeological data, scheduling, and site analysis.
 
-## Development server
+## Features
+- **Responsive Design**: Optimized for desktops, tablets, and mobile devices.
+- **Role-Based Navigation**: Custom dashboards for Admins, Archaeologists, Researchers, Visitors, and Conservators.
+- **Interactive Components**: Cards and modals for managing sites, artifacts, tours, and more.
+- **Real-Time Updates**: Integration with backend APIs for live data fetching and updates.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Project Structure
 
-## Code scaffolding
+### Key Directories
+```plaintext
+src/app
+├── Cards
+│   ├── artifact
+│   ├── Editable
+│   ├── notification
+│   ├── publicationcard
+│   ├── sitecard
+│   └── visittourcard
+├── footer
+├── Models
+├── Navbar
+├── Pages
+│   ├── auth
+│   ├── home
+│   ├── profile
+│   ├── publications
+│   ├── site
+│   ├── sites
+│   └── tours
+├── Services
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
 
-## Build
+### Highlights
+1. **Cards**
+   - Modular components to display data such as artifacts, sites, publications, and visitor tours.
+2. **Pages**
+   - Organized sections for authentication, user profiles, publications, and site exploration.
+3. **Services**
+   - Handles interaction with backend APIs for data retrieval and submission.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Getting Started
 
-## Running unit tests
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-repo-name/archaeological-site-frontend.git
+cd archaeological-site-frontend
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 2. Install Dependencies
+```bash
+npm install
+```
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### 3. Run the Application
+```bash
+ng serve
+```
